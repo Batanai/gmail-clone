@@ -29,9 +29,16 @@
   display: inline;
 }
 
+.sidebarOption--active > p {
+  display: inline !important;
+}
+
 .sidebarOption:hover,
 .sidebarOption:hover > p,
-.sidebarOption:hover > h3 {
+.sidebarOption:hover > h3,
+.sidebarOption--active,
+.sidebarOption--active > p,
+.sidebarOption--active > h3 {
   font-weight: 800 !important;
   background-color: #fcecec;
   color: #c04b37;
