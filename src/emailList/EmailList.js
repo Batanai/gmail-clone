@@ -12,12 +12,27 @@ import {
   Redo,
   Settings,
 } from "@material-ui/icons";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { db } from "../firebase/firebase";
 import "./EmailList.css";
 import EmailRow from "./emailRow/EmailRow";
 import Section from "./section/Section";
 
 const EmailList = () => {
+  const [emails, setEmails] = useState([]);
+
+  useEffect(() => {
+    db.collection("emails")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) =>
+        setEmails(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
+        )
+      );
+  }, []);
   return (
     <div className="emailList">
       <div className="emailList__settings">
@@ -57,10 +72,98 @@ const EmailList = () => {
       </div>
 
       <div className="emailList__list">
+        {emails.map(({ id, data: { to, subject, message, timestamp } }) => (
+          <EmailRow
+            id={id}
+            key={id}
+            title={to}
+            subject={subject}
+            message={message}
+            time={new Date(timestamp?.seconds * 1000).toUTCString()}
+          />
+        ))}
         <EmailRow
           title="Twitch"
           subject="Whats good fellower streamers"
-          description="This is a test and we cant belive this gmail clone is coming alive"
+          message="This is a test and we cant belive this gmail clone is coming alive"
+          time="10pm"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Whats good fellower streamers"
+          message="This is a test and we cant belive this gmail clone is coming alive"
+          time="10pm"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Whats good fellower streamers"
+          message="This is a test and we cant belive this gmail clone is coming alive"
+          time="10pm"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Whats good fellower streamers"
+          message="This is a test and we cant belive this gmail clone is coming alive"
+          time="10pm"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Whats good fellower streamers"
+          message="This is a test and we cant belive this gmail clone is coming alive"
+          time="10pm"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Whats good fellower streamers"
+          message="This is a test and we cant belive this gmail clone is coming alive"
+          time="10pm"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Whats good fellower streamers"
+          message="This is a test and we cant belive this gmail clone is coming alive"
+          time="10pm"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Whats good fellower streamers"
+          message="This is a test and we cant belive this gmail clone is coming alive"
+          time="10pm"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Whats good fellower streamers"
+          message="This is a test and we cant belive this gmail clone is coming alive"
+          time="10pm"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Whats good fellower streamers"
+          message="This is a test and we cant belive this gmail clone is coming alive"
+          time="10pm"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Whats good fellower streamers"
+          message="This is a test and we cant belive this gmail clone is coming alive"
+          time="10pm"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Whats good fellower streamers"
+          message="This is a test and we cant belive this gmail clone is coming alive"
+          time="10pm"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Whats good fellower streamers"
+          message="This is a test and we cant belive this gmail clone is coming alive"
+          time="10pm"
+        />
+        <EmailRow
+          title="Twitch"
+          subject="Whats good fellower streamers"
+          message="This is a test and we cant belive this gmail clone is coming alive"
           time="10pm"
         />
       </div>
